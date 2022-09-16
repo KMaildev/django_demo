@@ -39,12 +39,14 @@
             <p>
                 {{room.topic.name}}
             </p>
-            <a href="{% url 'update_room' room.id %}">
-                Edit
-            </a>
-            <a href="{% url 'delete_room' room.id %}">
-                Delete
-            </a>
+            {% if request.user == room.host %}
+                <a href="{% url 'update_room' room.id %}">
+                    Edit
+                </a>
+                <a href="{% url 'delete_room' room.id %}">
+                    Delete
+                </a>
+            {% endif %}
             <hr>
         </div>
         {% endfor %}

@@ -1,12 +1,31 @@
 {% extends 'main.html' %}
 
 {% block content %}
-<h1>Room Page</h1>
-<h4>
-    {{room.name}}
-</h4>
+<div>
+    <h4>
+        {{room.name}}
+    </h4>
+    <p>
+        {{room.description}}
+    </p>
+</div>
 <hr>
-<p>
-    {{room.description}}
-</p>
+<div>
+    <h6>Conversation</h6>
+    <ul>
+        {% for message in room_messages %}
+        <li>
+            <small>
+                @{{message.user}}
+                {{message.created|timesince}} age
+            </small>
+            <p>
+                {{message.body}}
+            </p>
+        </li>
+        {% endfor %}
+    </ul>
+</div>
+
+<div></div>
 {% endblock %}
