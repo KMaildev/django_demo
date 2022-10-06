@@ -6,8 +6,8 @@
     <h4>Login</h4>
     <form action="" method="post">
         {% csrf_token %}
-        <input type="text" name="username" placeholder="Email" class="form-control"> <br>
-        <input type="password" name="password" placeholder="Password" class="form-control"> <br>
+        <input type="text" name="username" placeholder="Email" class="form-control" value="zinmintun"> <br>
+        <input type="password" name="password" placeholder="Password" class="form-control" value="Admin@11223344"> <br>
         <input type="submit" value="Login" class="btn btn-success">
         <a href="{% url 'register' %}">
             Register

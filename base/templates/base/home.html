@@ -40,14 +40,36 @@
                 {{room.topic.name}}
             </p>
             {% if request.user == room.host %}
-                <a href="{% url 'update_room' room.id %}">
-                    Edit
-                </a>
-                <a href="{% url 'delete_room' room.id %}">
-                    Delete
-                </a>
+            <a href="{% url 'update_room' room.id %}">
+                Edit
+            </a>
+            <a href="{% url 'delete_room' room.id %}">
+                Delete
+            </a>
             {% endif %}
             <hr>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+
+<div class="col-md-3">
+    <div class="list-group">
+        <a href="{% url 'home' %}" class="list-group-item list-group-item-action active">
+            Recent Activities
+        </a>
+        {% for room_message in room_messages %}
+        <div>
+            <small>
+                @{{room_message.user}}
+                {{room_message.created.timesince}}
+            </small>
+            <small>
+                repilied to "{{room_message.room}}"
+            </small>
+            <p>
+                {{room_message.body}}
+            </p>
         </div>
         {% endfor %}
     </div>
