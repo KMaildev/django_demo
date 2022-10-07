@@ -3,16 +3,7 @@
 {% block content %}
 
 <div class="col-md-3">
-    <div class="list-group">
-        <a href="{% url 'home' %}" class="list-group-item list-group-item-action active">
-            Browse Topic
-        </a>
-        {% for topic in topics %}
-        <a href="{% url 'home' %}?q={{ topic.name }}" class="list-group-item list-group-item-action">
-            {{topic.name}}
-        </a>
-        {% endfor %}
-    </div>
+    {% include 'base/topices_components.html' %}
 </div>
 
 <div class="col-md-6">
@@ -25,53 +16,10 @@
         </a>
     </div>
     <hr>
-    <div>
-        {% for room in rooms %}
-        <div>
-            <div>
-                <span>
-                    @{{room.host.username}}
-                </span>
-            </div>
-            <a href="{% url 'room' room.id %}">
-                {{room.id}} -- {{room.name}}
-            </a>
-            <p>
-                {{room.topic.name}}
-            </p>
-            {% if request.user == room.host %}
-            <a href="{% url 'update_room' room.id %}">
-                Edit
-            </a>
-            <a href="{% url 'delete_room' room.id %}">
-                Delete
-            </a>
-            {% endif %}
-            <hr>
-        </div>
-        {% endfor %}
-    </div>
+    {% include 'base/feed_components.html' %}
 </div>
 
 <div class="col-md-3">
-    <div class="list-group">
-        <a href="{% url 'home' %}" class="list-group-item list-group-item-action active">
-            Recent Activities
-        </a>
-        {% for room_message in room_messages %}
-        <div>
-            <small>
-                @{{room_message.user}}
-                {{room_message.created.timesince}}
-            </small>
-            <small>
-                repilied to "{{room_message.room}}"
-            </small>
-            <p>
-                {{room_message.body}}
-            </p>
-        </div>
-        {% endfor %}
-    </div>
+    {% include 'base/activities_components.html' %}
 </div>
 {% endblock %}

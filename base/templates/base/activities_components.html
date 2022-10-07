@@ -1,0 +1,27 @@
+<div class="list-group">
+    <a href="{% url 'home' %}" class="list-group-item list-group-item-action active">
+        Recent Activities
+    </a>
+    {% for room_message in room_messages %}
+    <div>
+        <small>
+            <a href="{% url 'profile' room_message.user.id %}">
+                @{{room_message.user}}
+                {{room_message.created.timesince}}
+            </a>
+        </small>
+        <small>
+            repilied to "{{room_message.room}}"
+        </small>
+        <p>
+            {{room_message.body}}
+        </p>
+        {% if request.user == room_message.user %}
+        <a href="{% url 'delete_message' room_message.id %}">
+            Delete
+        </a>
+        {% endif %}
+        <hr>
+    </div>
+    {% endfor %}
+</div>
